@@ -115,7 +115,7 @@ void QtClient::sendFile()
     ///获取文件大小
     this->totalBytes = localFile->size();
     QDataStream sendout(&outBlock, QIODevice::WriteOnly);
-    sendout.setVersion(QDataStream::Qt_5_8);
+    sendout.setVersion(QDataStream::Qt_5_12);
     QString currentFileName = filename.right(filename.size() - filename.lastIndexOf('/') - 1);
 
     qDebug() << sizeof(currentFileName);
@@ -161,7 +161,7 @@ void QtClient::updateFileProgress(qint64 numBytes)
 void QtClient::updateFileProgress()
 {
     QDataStream inFile(this->fileSocket);
-    inFile.setVersion(QDataStream::Qt_5_8);
+    inFile.setVersion(QDataStream::Qt_5_12);
 
     ///如果接收到的数据小于16个字节，保存到来的文件头结构
     if (bytesReceived <= sizeof(qint64) * 2)
@@ -283,8 +283,7 @@ void QtClient::showFileInfoList(QFileInfoList pInfoList)
         QFileInfo tmpInfo = pInfoList.at(i);
         QString pFileName = tmpInfo.fileName();
         QListWidgetItem *tmpItem = new QListWidgetItem(pFileName);
-        if (tmpInfo.isDir())
-            tmpItem->setIcon(*getItemPropertyIcon(1));
+        if (tmpInfo.isDir()) tmpItem->setIcon(*getItemPropertyIcon(1));
         else
         {
             tmpItem->setIcon(*getItemPropertyIcon(2));
@@ -379,10 +378,10 @@ void QtClient::sendPicture(QListWidgetItem *item)
     //sendout.setVersion(QDataStream::Qt_5_8);
     //QString currentFileName = filename.right(filename.size() - filename.lastIndexOf('/') - 1);
 
-    ///獲取圖片大小
+    ///获取图片大小
     this->totalBytesofPicture = desiredSendPicture->size();
     QDataStream sendoutPic(&outBlockPic, QIODevice::WriteOnly);
-    sendoutPic.setVersion(QDataStream::Qt_5_8);
+    sendoutPic.setVersion(QDataStream::Qt_5_12);
     QString currentPictureName = tempPic.right(tempPic.size() - tempPic.lastIndexOf('/') - 1);
 
     //qDebug() << sizeof(currentFileName);

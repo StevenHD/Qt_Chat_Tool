@@ -91,7 +91,7 @@ private:
     ///文件传送
     QFile *localFile;
 
-    ///圖片傳送 將QPixmap改爲QFile
+    ///图片传送 將QPixmap改爲QFile
     QFile *desiredSendPicture;
     ///文件大小
     qint64 totalBytes;      //文件总字节数
